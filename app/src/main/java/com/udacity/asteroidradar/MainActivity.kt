@@ -9,13 +9,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //TODO:REPLACE THIS WITH YOUR SDK PATH IN local.properties
-        //sdk.dir=F\:\\AllSDKs\\sdk_win
-        //
-        //EXAMPLE
-        //sdk.dir=C\:\\UserName\\android\\sdk
-
-
-
     }
 }

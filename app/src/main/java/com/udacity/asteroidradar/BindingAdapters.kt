@@ -1,8 +1,16 @@
 package com.udacity.asteroidradar
 
+import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
+import com.udacity.asteroidradar.main.AsteroidAdapter
+import com.udacity.asteroidradar.main.ResponseStatues
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -38,4 +46,39 @@ fun bindTextViewToKmUnit(textView: TextView, number: Double) {
 fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
     val context = textView.context
     textView.text = String.format(context.getString(R.string.km_s_unit_format), number)
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, asteroidList: List<Asteroid>?) {
+    if (!asteroidList.isNullOrEmpty()) {
+        val adapter = recyclerView.adapter as AsteroidAdapter
+        adapter.submitList(asteroidList)
+    }
+}
+
+@BindingAdapter("imgUrl")
+fun bindPicOfDay(imageView: ImageView, imgUrl: String?) {
+    if (imgUrl != null) imgUrl.let {
+        var imgUri = it.toUri().buildUpon().scheme("https").build()
+        Picasso.get()
+            .load(imgUri)
+            .into(imageView)
+    }
+}
+
+@BindingAdapter("responseStatus")
+fun bindProgressBar(progressBar: ProgressBar, responseStatues: ResponseStatues) {
+    when (responseStatues) {
+        ResponseStatues.LOADING -> progressBar.visibility = View.VISIBLE
+        ResponseStatues.SUCCESS -> progressBar.visibility = View.GONE
+    }
+}
+
+@BindingAdapter("asteroidStatus")
+fun bindAsteroidStatus(imageView: ImageView , isHazardous: Boolean){
+    if (isHazardous){
+        imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
+    }else{
+        imageView.setImageResource(R.drawable.ic_status_normal)
+    }
 }

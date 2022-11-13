@@ -31,7 +31,7 @@ fun ArrayList<Asteroid>.asDataBaseModel(): Array<AsteroidEntity> {
 }
 
 // to map the asteroids from database to use it in our app
-fun List<Asteroid>.asDomainModel():List<Asteroid> {
+fun List<AsteroidEntity>.asDomainModel(): List<Asteroid> {
     return map {
         Asteroid(
             id = it.id,
