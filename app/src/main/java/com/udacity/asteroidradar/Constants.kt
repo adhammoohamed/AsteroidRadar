@@ -7,7 +7,7 @@ object Constants {
     const val API_QUERY_DATE_FORMAT = "YYYY-MM-dd"
     const val DEFAULT_END_DATE_DAYS = 7
     const val BASE_URL = "https://api.nasa.gov/"
-    const val API_KEY = "Za8xIVcMg6pKBb9Sj1Ijmr4FLPAml348v7c0u1Xi"
+    val API_KEY = BuildConfig.API_KEY
     const val DEMO_API_KEY = "DEMO"
 
     // get the current date to add in start_date parameter
