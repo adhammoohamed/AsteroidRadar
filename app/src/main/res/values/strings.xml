@@ -19,6 +19,9 @@
     <string name="not_hazardous_asteroid_image">Not hazardous asteroid image</string>
     <string name="this_is_nasa_s_picture_of_day_showing_nothing_yet">This is NASA\'s picture of day, showing nothing yet</string>
     <string name="nasa_picture_of_day_content_description_format">NASA\'s picture of day: %s</string>
+    <string name="broken_image">Broken image</string>
+    <string name="ic_hazardous">Potentially hazardous asteroid image</string>
+    <string name="ic_not_hazardous">Not hazardous asteroid</string>
     <string name="description_close_approach_date">close approach date</string>
     <string name="description_absolute_magnitude">absolute magnitude</string>
     <string name="description_help_button">Help button</string>

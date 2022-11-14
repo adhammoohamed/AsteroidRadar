@@ -39,22 +39,16 @@ class AsteroidRepository(var database: AsteroidsDatabase) {
     suspend fun refreshAsteroid() {
         withContext(Dispatchers.IO) {
             try {
-
                 val apiResponse = AsteroidApi.retrofitService.getAsteroids(
                     Constants.formattedStartDate,
                     Constants.formattedEndDate,
                     Constants.API_KEY
                 )
-
                 val jsonObject = JSONObject(apiResponse)
                 val responseArrayList: ArrayList<Asteroid> = parseAsteroidsJsonResult(jsonObject)
                 val mappedResult = responseArrayList.asDataBaseModel()
                 database.asteroidDao.insertAll(*mappedResult)
-                Log.i("Adham", "in refresh ${database.asteroidDao.getAllAsteroids().value}")
-                Log.i("Adham", "Success")
-            } catch (e: Exception) {
-                Log.i("Adham", "${asteroids.value}")
-                Log.i("Adham", "Failed")
+            } catch (_: Exception) {
             }
         }
     }

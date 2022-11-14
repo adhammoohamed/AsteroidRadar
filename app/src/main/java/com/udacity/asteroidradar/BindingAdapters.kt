@@ -12,21 +12,17 @@ import com.squareup.picasso.Picasso
 import com.udacity.asteroidradar.main.AsteroidAdapter
 import com.udacity.asteroidradar.main.ResponseStatues
 
-@BindingAdapter("statusIcon")
-fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
-    if (isHazardous) {
-        imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
-    } else {
-        imageView.setImageResource(R.drawable.ic_status_normal)
-    }
-}
-
 @BindingAdapter("asteroidStatusImage")
 fun bindDetailsStatusImage(imageView: ImageView, isHazardous: Boolean) {
     if (isHazardous) {
         imageView.setImageResource(R.drawable.asteroid_hazardous)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.potentially_hazardous_asteroid_image)
+
     } else {
         imageView.setImageResource(R.drawable.asteroid_safe)
+        imageView.contentDescription =
+            imageView.context.getString(R.string.not_hazardous_asteroid_image)
     }
 }
 
@@ -57,12 +53,18 @@ fun bindRecyclerView(recyclerView: RecyclerView, asteroidList: List<Asteroid>?) 
 }
 
 @BindingAdapter("imgUrl")
-fun bindPicOfDay(imageView: ImageView, imgUrl: String?) {
-    if (imgUrl != null) imgUrl.let {
-        var imgUri = it.toUri().buildUpon().scheme("https").build()
-        Picasso.get()
-            .load(imgUri)
-            .into(imageView)
+fun bindPicOfDay(imageView: ImageView, pictureOfDay: PictureOfDay?) {
+    pictureOfDay?.let {
+        if (it.mediaType == "image") {
+            var imgUri = it.url.toUri().buildUpon().scheme("https").build()
+            Picasso.get()
+                .load(imgUri)
+                .into(imageView)
+            imageView.contentDescription = imageView.context.getString(R.string.image_of_the_day)
+        } else {
+            imageView.setImageResource(R.drawable.ic_broken_image)
+            imageView.contentDescription = imageView.context.getString(R.string.broken_image)
+        }
     }
 }
 
@@ -75,10 +77,12 @@ fun bindProgressBar(progressBar: ProgressBar, responseStatues: ResponseStatues) 
 }
 
 @BindingAdapter("asteroidStatus")
-fun bindAsteroidStatus(imageView: ImageView , isHazardous: Boolean){
-    if (isHazardous){
+fun bindAsteroidStatus(imageView: ImageView, isHazardous: Boolean) {
+    if (isHazardous) {
         imageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
-    }else{
+        imageView.contentDescription = imageView.context.getString(R.string.ic_hazardous)
+    } else {
         imageView.setImageResource(R.drawable.ic_status_normal)
+        imageView.contentDescription = imageView.context.getString(R.string.ic_not_hazardous)
     }
 }

@@ -49,8 +49,6 @@ class MainViewModel(application: Application) : ViewModel() {
 
             // response succeed
             _responseStatus.value = ResponseStatues.SUCCESS
-            Log.i("Adham", "Asteroids in vm ${asteroids.value}")
-
             getPicOfDay()
         }
     }
@@ -60,9 +58,7 @@ class MainViewModel(application: Application) : ViewModel() {
             try {
                 var response = picOfDayApiService.getPicOfDay(Constants.API_KEY)
                 _picOfDayResponse.value = response
-            } catch (e: Exception) {
-                Log.i("Adham", "pic Failed")
-            }
+            } catch (_: Exception) { }
         }
     }
 }
